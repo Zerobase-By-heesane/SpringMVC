@@ -18,7 +18,7 @@ public class LogInterceptor implements HandlerInterceptor {
     }
 
 
-    // handling 한 후
+    // handling 한 후 => 성공 후
     // ModelAndView : Controller에서 Model에 담아서 보낸 데이터
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
