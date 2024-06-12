@@ -60,24 +60,4 @@ public class SampleController {
         private String orderId;
         private Integer orderAmount;
     }
-
-
-    // Response를 통해 반환하는 이유 : Serialize를 통해 JSON으로 변환해서 반환
-    // Serialize : 객체를 JSON으로 변환
-    // Deserialize : JSON을 객체로 변환
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
-        log.error("IllegalAccessException : {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(new ErrorResponse(ErrorCode.TOO_BIG_ID_ERROR, e.getMessage()));
-    }
-
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(WebSampleException.class)
-    public ResponseEntity<ErrorResponse> handleWebSampleException(WebSampleException e) {
-        log.error("IllegalAccessException : {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(new ErrorResponse(e.getErrorCode(), e.getMessage()));
-    }
 }
