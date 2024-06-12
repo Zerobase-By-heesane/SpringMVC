@@ -9,33 +9,38 @@ import org.springframework.web.bind.annotation.*;
 public class SampleController {
 
     @GetMapping("/order/{orderId}")
-    public String getOrder(@PathVariable String orderId){
+    public String getOrder(@PathVariable String orderId) throws IllegalAccessException {
         log.info("Get some Order : {}", orderId);
-        return "orderId : "+orderId+", orderAmount:1000";
+
+        if ("500".equals(orderId)) {
+            throw new IllegalAccessException("500 is Invalid Order Id");
+        }
+
+        return "orderId : " + orderId + ", orderAmount:1000";
     }
 
     @GetMapping("/order")
     public String postOrder(
             @RequestParam String orderId,
-            @RequestParam String orderAmount){
+            @RequestParam String orderAmount) {
         log.info("Get some Order Id : {}", orderId);
         log.info("Get some Order Amount : {}", orderAmount);
-        return "orderId : "+orderId+", orderAmount:"+orderAmount;
+        return "orderId : " + orderId + ", orderAmount:" + orderAmount;
     }
 
     @PostMapping("/order")
     public String postOrder2(
             @RequestBody CreateOrderRequest createOrderRequest,
-            @RequestHeader String userAccountId){
+            @RequestHeader String userAccountId) {
         log.info("Post some Order Id : {}", createOrderRequest.getOrderId());
         log.info("Post some Order Amount : {}", createOrderRequest.getOrderAmount());
         log.info("Post some User Account Id : {}", userAccountId);
 
-        return "User Account Id : "+userAccountId+", orderId : "+createOrderRequest.getOrderId()+", orderAmount:"+createOrderRequest.getOrderAmount();
+        return "User Account Id : " + userAccountId + ", orderId : " + createOrderRequest.getOrderId() + ", orderAmount:" + createOrderRequest.getOrderAmount();
     }
 
     @Data
-    public static class CreateOrderRequest{
+    public static class CreateOrderRequest {
         private String orderId;
         private Integer orderAmount;
     }
