@@ -18,8 +18,8 @@ public class SampleController {
     public String postOrder(
             @RequestParam String orderId,
             @RequestParam String orderAmount){
-        log.info("Post some Order Id : {}", orderId);
-        log.info("Post some Order Amount : {}", orderAmount);
+        log.info("Get some Order Id : {}", orderId);
+        log.info("Get some Order Amount : {}", orderAmount);
         return "orderId : "+orderId+", orderAmount:"+orderAmount;
     }
 
